@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoArtesanas - Comercio Justo, Impacto Social y Empaques Ecológicos</title>
+  <!-- FontAwesome Icons via CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <style>
+    :root {
+      --bg-primary: #f4f7f4;
+      --bg-card: #ffffff;
+      --bg-header: #0f381e;
+      --text-main: #1c2e24;
+      --text-muted: #3d5245;
+      --brand-primary: #1e5e3a;
+      --brand-secondary: #2d8a54;
+      --brand-accent: #d97706;
+      --brand-light: #e8f5ed;
+      --border-color: #cbd5e1;
+      --focus-ring: #2563eb;
+      --font-scale: 1rem;
+      --header-text: #ffffff;
+      --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    body.high-contrast {
+      --bg-primary: #000000;
+      --bg-card: #0d0d0d;
+      --bg-header: #000000;
+      --text-main: #ffffff;
+      --text-muted: #f0f0f0;
+      --brand-primary: #ffff00;
+      --brand-secondary: #00ff66;
+      --brand-accent: #ff9900;
+      --brand-light: #1a1a1a;
+      --border-color: #ffffff;
+      --focus-ring: #ffff00;
+      --header-text: #ffff00;
+      --card-shadow: none;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: var(--font-scale);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      line-height: 1.6;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -60px;
+      left: 10px;
+      background: #ffff00;
+      color: #000000;
+      padding: 12px 20px;
+      z-index: 9999;
+      text-decoration: none;
+      font-weight: 800;
+      border: 3px solid #000000;
+      border-radius: 4px;
+      transition: top 0.2s;
+    }
+    .skip-link:focus {
+      top: 10px;
+    }
+
+    .a11y-toolbar {
+      background-color: #0a1f14;
+      color: #ffffff;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      border-bottom: 2px solid var(--brand-accent);
+    }
+
+    .a11y-toolbar-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .a11y-btn-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .a11y-btn {
+      background: #1e3a29;
+      color: #ffffff;
+      border: 2px solid #3d6e50;
+      padding: 8px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    body.high-contrast .a11y-btn {
+      background: #000000;
+      color: #ffff00;
+      border-color: #ffff00;
+    }
+
+    .a11y-btn:hover,
+    .a11y-btn:focus {
+      background: var(--brand-accent);
+      color: #000000;
+      border-color: #ffffff;
+      outline: 3px solid var(--focus-ring);
+    }
+
+    header {
+      background: var(--bg-header);
+      color: var(--header-text);
+      padding: 20px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      border-bottom: 4px solid var(--brand-secondary);
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo-svg {
+      width: 48px;
+      height: 48px;
+      fill: none;
+    }
+
+    .logo-container h1 {
+      font-size: 1.8rem;
+      letter-spacing: -0.5px;
+      font-weight: 800;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: var(--header-text);
+      text-decoration: none;
+      font-weight: 700;
+      padding: 10px 16px;
+      border-radius: 6px;
+      display: inline-block;
+      border: 2px solid transparent;
+      transition: all 0.2s;
+    }
+
+    nav a:hover, nav a:focus {
+      background: var(--brand-light);
+      color: var(--brand-primary);
+      border-color: var(--brand-secondary);
+    }
+
+    body.high-contrast nav a:hover, 
+    body.high-contrast nav a:focus {
+      background: #ffff00;
+      color: #000000;
+    }
+
+    main {
+      max-width: 1280px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    section {
+      margin-bottom: 60px;
+      scroll-margin-top: 100px;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 24px;
+      color: var(--brand-primary);
+      border-bottom: 4px solid var(--brand-secondary);
+      padding-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hero {
+      background: var(--brand-light);
+      border: 2px solid var(--brand-secondary);
+      border-radius: 16px;
+      padding: 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      box-shadow: var(--card-shadow);
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .hero-text h2 {
+      font-size: 2.4rem;
+      color: var(--brand-primary);
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .hero-text p {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--brand-primary);
+      color: #ffffff;
+      padding: 14px 28px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 8px;
+      border: 3px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    body.high-contrast .btn {
+      background: #ffff00;
+      color: #000000;
+      border-color: #ffffff;
+    }
+
+    .btn:hover, .btn:focus {
+      background: var(--brand-secondary);
+      outline: 3px solid var(--focus-ring);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--brand-primary);
+      border: 3px solid var(--brand-primary);
+    }
+
+    body.high-contrast .btn-secondary {
+      color: #00ff66;
+      border-color: #00ff66;
+    }
+
+    .btn-secondary:hover, .btn-secondary:focus {
+      background: var(--brand-primary);
+      color: #ffffff;
+    }
+
+    .svg-banner {
+      width: 100%;
+      height: auto;
+      max-height: 380px;
+      border-radius: 12px;
+      background: #ffffff;
+      padding: 16px;
+      border: 1px solid var(--border-color);
+    }
+
+    body.high-contrast .svg-banner {
+      background: #1a1a1a;
+      border-color: #ffff00;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 2px solid var(--border-color);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: var(--card-shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .card:hover {
+      border-color: var(--brand-secondary);
+      transform: translateY(-4px);
+    }
+
+    .card-svg-container {
+      width: 100%;
+      height: 200px;
+      background: var(--brand-light);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      border: 1px solid var(--border-color);
+      overflow: hidden;
+    }
+
+    .card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+      color: var(--brand-primary);
+    }
+
+    .card p {
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      background: var(--brand-light);
+      color: var(--brand-primary);
+      border: 1px solid var(--brand-secondary);
+    }
+
+    body.high-contrast .badge {
+      background: #ffff00;
+      color: #000000;
+    }
+
+    .pour-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .pour-card {
+      background: var(--bg-card);
+      border-left: 8px solid var(--brand-secondary);
+      border-top: 2px solid var(--border-color);
+      border-right: 2px solid var(--border-color);
+      border-bottom: 2px solid var(--border-color);
+      border-radius: 0 12px 12px 0;
+      padding: 20px;
+    }
+
+    .pour-card h3 {
+      color: var(--brand-primary);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    footer {
+      background: #0f2417;
+      color: #ffffff;
+      padding: 40px 20px;
+      border-top: 5px solid var(--brand-accent);
+      margin-top: 60px;
+    }
+
+    .footer-content {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .footer-section h4 {
+      color: var(--brand-accent);
+      margin-bottom: 16px;
+      font-size: 1.2rem;
+    }
+
+    .footer-section p, .footer-section li {
+      color: #d1d5db;
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+      list-style: none;
+    }
+
+    body.high-contrast footer {
+      background: #000000;
+      border-color: #ffff00;
+    }
+
+    body.high-contrast .footer-section h4 {
+      color: #ffff00;
+    }
+
+    body.high-contrast .footer-section p, 
+    body.high-contrast .footer-section li {
+      color: #ffffff;
+    }
+
+    *:focus {
+      outline: 3px solid var(--focus-ring);
+      outline-offset: 3px;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+  <aside class="a11y-toolbar" aria-label="Herramientas de Accesibilidad">
+    <div class="a11y-toolbar-title">
+      <i class="fa-solid fa-universal-access" aria-hidden="true"></i>
+      <span>Panel de Accesibilidad Adaptativa</span>
+    </div>
+    <div class="a11y-btn-group">
+      <button class="a11y-btn" onclick="changeFontSize(0.1)" aria-label="Aumentar tamaño de letra">
+        <i class="fa-solid fa-font" aria-hidden="true"></i><i class="fa-solid fa-plus" aria-hidden="true"></i> A+
+      </button>
+      <button class="a11y-btn" onclick="changeFontSize(-0.1)" aria-label="Disminuir tamaño de letra">
+        <i class="fa-solid fa-font" aria-hidden="true"></i><i class="fa-solid fa-minus" aria-hidden="true"></i> A-
+      </button>
+      <button class="a11y-btn" onclick="toggleContrast()" aria-label="Alternar modo de alto contraste">
+        <i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i> Alto Contraste
+      </button>
+      <button class="a11y-btn" onclick="readPage()" aria-label="Leer contenido de la página en voz alta">
+        <i class="fa-solid fa-volume-high" aria-hidden="true"></i> Lector de Voz
+      </button>
+      <button class="a11y-btn" onclick="stopSpeech()" aria-label="Detener lectura de voz">
+        <i class="fa-solid fa-circle-stop" aria-hidden="true"></i> Detener
+      </button>
+    </div>
+  </aside>
+
+  <header>
+    <div class="logo-container">
+      <svg class="logo-svg" viewBox="0 0 64 64" role="img" aria-label="Logotipo de EcoArtesanas: Hoja estilizada dentro de un tejido artesanal">
+        <circle cx="32" cy="32" r="30" fill="#2d8a54" />
+        <path d="M20 40 C 20 20, 44 20, 44 40 C 32 48, 20 40, 20 40 Z" fill="#e8f5ed" />
+        <path d="M32 16 L32 48 M24 28 L40 28 M22 36 L42 36" stroke="#0f381e" stroke-width="3" stroke-linecap="round" />
+      </svg>
+      <h1>EcoArtesanas</h1>
+    </div>
+    <nav aria-label="Navegación Principal">
+      <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#nosotros">Sobre Nosotros</a></li>
+        <li><a href="#catalogo">Productos</a></li>
+        <li><a href="#modelo-inclusivo">Modelo Inclusivo</a></li>
+        <li><a href="#metodologia-pour">Metodología POUR</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content">
+
+    <section id="inicio" class="hero" aria-labelledby="hero-heading">
+      <div class="hero-text">
+        <h2 id="hero-heading">Empoderamiento Femenino y Empaques Ecológicos</h2>
+        <p>Impulsamos la inclusión socioeconómica de mujeres rurales y en situación de vulnerabilidad mediante la confección de textiles sostenibles, empaques ecológicos y artesanías de alto valor ambiental.</p>
+        <div class="hero-actions">
+          <a href="#catalogo" class="btn">
+            <i class="fa-solid fa-basket-shopping" aria-hidden="true"></i> Ver Catálogo
+          </a>
+          <a href="#modelo-inclusivo" class="btn btn-secondary">
+            <i class="fa-solid fa-users" aria-hidden="true"></i> Nuestro Conoce Impacto
+          </a>
+        </div>
+      </div>
+
+      <!-- SVG Illustration (No broken image links) -->
+      <svg class="svg-banner" viewBox="0 0 500 350" role="img" aria-label="Ilustración vectorial de dos artesanas tejiendo empaques ecológicos con materiales reciclados">
+        <rect width="500" height="350" rx="12" fill="#e8f5ed" />
+        <!-- Fondo Decorativo -->
+        <circle cx="400" cy="90" r="70" fill="#a7f3d0" opacity="0.6" />
+        <circle cx="90" cy="280" r="60" fill="#fde68a" opacity="0.5" />
+        
+        <!-- Artesana 1 -->
+        <circle cx="150" cy="120" r="30" fill="#d97706" />
+        <path d="M110 220 C110 160, 190 160, 190 220 Z" fill="#1e5e3a" />
+        
+        <!-- Artesana 2 -->
+        <circle cx="350" cy="120" r="30" fill="#b45309" />
+        <path d="M310 220 C310 160, 390 160, 390 220 Z" fill="#2d8a54" />
+        
+        <!-- Telar / Empaque en proceso -->
+        <rect x="200" y="150" width="100" height="110" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="4" />
+        <line x1="220" y1="150" x2="220" y2="260" stroke="#059669" stroke-width="3" />
+        <line x1="250" y1="150" x2="250" y2="260" stroke="#059669" stroke-width="3" />
+        <line x1="280" y1="150" x2="280" y2="260" stroke="#059669" stroke-width="3" />
+        <path d="M200 180 Q250 200 300 180 M200 220 Q250 240 300 220" stroke="#d97706" stroke-width="4" fill="none" />
+        
+        <!-- Hoja Verde Eco -->
+        <path d="M250 70 C220 40, 280 20, 250 70 Z" fill="#10b981" />
+      </svg>
+    </section>
+
+    <section id="nosotros" aria-labelledby="nosotros-heading">
+      <h2 id="nosotros-heading" class="section-title">
+        <i class="fa-solid fa-heart-pulse" aria-hidden="true"></i> Sobre Nosotros
+      </h2>
+      <div class="grid-container">
+        <article class="card">
+          <div class="card-svg-container">
+            <svg viewBox="0 0 200 150" width="100%" height="100%" role="img" aria-label="Icono de misión: manos unidas sosteniendo una planta">
+              <circle cx="100" cy="75" r="50" fill="#2d8a54" opacity="0.2" />
+              <path d="M70 95 C70 80, 100 80, 100 95 C100 80, 130 80, 130 95" stroke="#1e5e3a" stroke-width="6" fill="none" stroke-linecap="round" />
+              <path d="M100 85 L100 45 M100 55 C90 45, 80 50, 85 60 Z M100 50 C110 40, 120 45, 115 55 Z" fill="#10b981" stroke="#1e5e3a" stroke-width="2" />
+            </svg>
+          </div>
+          <h3>Nuestra Misión</h3>
+          <p>Ofrecer oportunidades de trabajo digno y remuneración justa a mujeres artesanas, transformando materiales reciclados y naturales en empaques y accesorios ecológicos de alta calidad.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-svg-container">
+            <svg viewBox="0 0 200 150" width="100%" height="100%" role="img" aria-label="Icono de visión: ojo vigilante sobre un mundo verde">
+              <circle cx="100" cy="75" r="50" fill="#d97706" opacity="0.2" />
+              <path d="M60 75 Q100 40 140 75 Q100 110 60 75 Z" fill="none" stroke="#b45309" stroke-width="5" />
+              <circle cx="100" cy="75" r="18" fill="#1e5e3a" />
+              <circle cx="103" cy="72" r="6" fill="#ffffff" />
+            </svg>
+          </div>
+          <h3>Visión Sostenible</h3>
+          <p>Ser el referente líder en empaques biodegradables y regalos corporativos con impacto social positivo, demostrando que la accesibilidad y el cuidado del planeta van de la mano.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="catalogo" aria-labelledby="catalogo-heading">
+      <h2 id="catalogo-heading" class="section-title">
+        <i class="fa-solid fa-boxes-packing" aria-hidden="true"></i> Catálogo de Productos
+      </h2>
+      <div class="grid-container">
+
+        <!-- Producto 1: B2C -->
+        <article class="card">
+          <span class="badge">Línea B2C - Particular</span>
+          <div class="card-svg-container">
+            <svg viewBox="0 0 200 160" width="100%" height="100%" role="img" aria-label="Ilustración de una bolsa reutilizable de tela orgánica bordada">
+              <rect x="50" y="50" width="100" height="90" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="4" />
+              <path d="M75 50 C75 25, 125 25, 125 50" fill="none" stroke="#b45309" stroke-width="5" stroke-linecap="round" />
+              <path d="M85 85 C100 70, 115 100, 125 80" fill="none" stroke="#10b981" stroke-width="4" stroke-linecap="round" />
+            </svg>
+          </div>
+          <h3>Bolsa Reutilizable de Algodón Orgánico</h3>
+          <p>Diseñada para el uso diario. Fabricada por artesanas rurales con telas 100% orgánicas y tintes naturales biodegradables.</p>
+          <button class="btn" aria-label="Comprar Bolsa Reutilizable por $180 pesos">
+            <i class="fa-solid fa-cart-plus" aria-hidden="true"></i> Comprar - $180 MXN
+          </button>
+        </article>
+
+        <!-- Producto 2: B2B -->
+        <article class="card">
+          <span class="badge">Línea B2B - Empresas</span>
+          <div class="card-svg-container">
+            <svg viewBox="0 0 200 160" width="100%" height="100%" role="img" aria-label="Ilustración de empaques biodegradables para envíos corporativos masivos">
+              <rect x="40" y="60" width="120" height="80" rx="6" fill="#e8f5ed" stroke="#1e5e3a" stroke-width="4" />
+              <polygon points="40,60 100,105 160,60" fill="none" stroke="#2d8a54" stroke-width="4" />
+              <circle cx="100" cy="110" r="12" fill="#d97706" />
+              <path d="M96 110 L104 110" stroke="#ffffff" stroke-width="3" />
+            </svg>
+          </div>
+          <h3>Empaque Ecológico Institucional B2B</h3>
+          <p>Cajas y sobreenvoltorios biodegradables personalizados para marcas comprometidas con la neutralidad de carbono y responsabilidad social.</p>
+          <button class="btn btn-secondary" aria-label="Solicitar cotización de Empaque B2B">
+            <i class="fa-solid fa-file-signature" aria-hidden="true"></i> Cotizar Mayoreo
+          </button>
+        </article>
+
+        <!-- Producto 3: B2C / B2B -->
+        <article class="card">
+          <span class="badge">Regalo Corporativo / B2C</span>
+          <div class="card-svg-container">
+            <svg viewBox="0 0 200 160" width="100%" height="100%" role="img" aria-label="Ilustración de un kit artesanal con frasco y textiles hechos a mano">
+              <rect x="60" y="50" width="80" height="90" rx="10" fill="#ffffff" stroke="#059669" stroke-width="4" />
+              <rect x="70" y="35" width="60" height="15" rx="3" fill="#d97706" />
+              <path d="M80 80 Q100 60 120 80 Q100 100 80 80" fill="#a7f3d0" />
+            </svg>
+          </div>
+          <h3>Set de Regalo "Artesanía y Vida"</h3>
+          <p>Incluye productos gastronómicos locales y envoltorios textiles elaborados con técnicas ancestrales de tejido a telar.</p>
+          <button class="btn" aria-label="Comprar Set de Regalo por $350 pesos">
+            <i class="fa-solid fa-gift" aria-hidden="true"></i> Comprar - $350 MXN
+          </button>
+        </article>
+
+      </div>
+    </section>
+
+    <section id="modelo-inclusivo" aria-labelledby="modelo-heading">
+      <h2 id="modelo-heading" class="section-title">
+        <i class="fa-solid fa-hands-holding-child" aria-hidden="true"></i> Modelo Inclusivo y Población Beneficiaria
+      </h2>
+      <div class="grid-container">
+        <article class="card">
+          <h3>Inclusión Social Abierta</h3>
+          <p>Trabajamos de la mano con mujeres en situación de vulnerabilidad económica, garantizando espacios de trabajo adaptados, horarios flexibles y capacitación continua en habilidades artesanales y digitales.</p>
+        </article>
+        <article class="card">
+          <h3>Comercio Justo Garantizado</h3>
+          <p>El 100% de nuestras colaboradoras reciben ingresos por encima del salario promedio regional, eliminando intermediarios abusivos y fomentando su autonomía financiera.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="metodologia-pour" aria-labelledby="pour-heading">
+      <h2 id="pour-heading" class="section-title">
+        <i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Implementación Metodología POUR (WCAG 2.1)
+      </h2>
+      <div class="pour-grid">
+        
+        <div class="pour-card">
+          <h3><i class="fa-solid fa-eye" aria-hidden="true"></i> 1. Perceptible</h3>
+          <p>Uso de ilustraciones vectoriales SVG con descripciones <code>aria-label</code>, eliminando enlaces rotos de imágenes. Colores con contraste superior a 4.5:1 (WCAG AA).</p>
+        </div>
+
+        <div class="pour-card">
+          <h3><i class="fa-solid fa-keyboard" aria-hidden="true"></i> 2. Operable</h3>
+          <p>Navegación fluida por teclado (tecla Tab), indicador visual de enfoque resaltado y enlace directo de salto al contenido principal.</p>
+        </div>
+
+        <div class="pour-card">
+          <h3><i class="fa-solid fa-brain" aria-hidden="true"></i> 3. Comprensible</h3>
+          <p>Estructura semántica clara, lenguaje accesible e interfaz predecible con controles interactivos identificables.</p>
+        </div>
+
+        <div class="pour-card">
+          <h3><i class="fa-solid fa-gears" aria-hidden="true"></i> 4. Robusto</h3>
+          <p>Marcado semántico puro HTML5 y soporte con la API de síntesis de voz del navegador para usuarios con visión reducida.</p>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>EcoArtesanas</h4>
+        <p>Proyecto comprometido con el desarrollo sostenible, el comercio justo y la accesibilidad digital universal.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Contacto e Inclusión</h4>
+        <ul>
+          <li><i class="fa-solid fa-envelope" aria-hidden="true"></i> contacto@ecoartesanas.org</li>
+          <li><i class="fa-solid fa-phone" aria-hidden="true"></i> +52 (55) 5555-0199</li>
+          <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Ciudad de México, México</li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Cumplimiento Accesible</h4>
+        <p>Este sitio web cumple con las pautas de accesibilidad para el contenido web WCAG 2.1 Nivel AA.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* Global font scale multiplier */
+    let fontScale = 1.0;
+
+    /**
+     * Increases or decreases font size globally
+     * @param {number} step - Change factor
+     */
+    function changeFontSize(step) {
+      fontScale += step;
+      if (fontScale < 0.8) fontScale = 0.8;
+      if (fontScale > 1.6) fontScale = 1.6;
+      document.documentElement.style.setProperty('--font-scale', `${fontScale}rem`);
+      announceA11y(`Tamaño de texto ajustado a ${Math.round(fontScale * 100)} por ciento`);
+    }
+
+    /**
+     * Toggles High Contrast CSS Class
+     */
+    function toggleContrast() {
+      document.body.classList.toggle('high-contrast');
+      const isHigh = document.body.classList.contains('high-contrast');
+      announceA11y(isHigh ? "Modo alto contraste activado" : "Modo alto contraste desactivado");
+    }
+
+    /**
+     * Speech Synthesis (Text-to-speech) for screen reading
+     */
+    function readPage() {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const textToRead = document.getElementById('main-content').innerText;
+        const utterance = new SpeechSynthesisUtterance(textToRead);
+        utterance.lang = 'es-MX';
+        utterance.rate = 0.95;
+        window.speechSynthesis.speak(utterance);
+        announceA11y("Iniciando lectura de voz");
+      } else {
+        alert("Su navegador no soporta la síntesis de voz integrada.");
+      }
+    }
+
+    /**
+     * Stops Speech Synthesis
+     */
+    function stopSpeech() {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        announceA11y("Lectura de voz detenida");
+      }
+    }
+
+    /**
+     * Screen reader notification helper
+     */
+    function announceA11y(message) {
+      const announcer = document.createElement('div');
+      announcer.setAttribute('aria-live', 'polite');
+      announcer.setAttribute('style', 'position:absolute; left:-9999px;');
+      document.body.appendChild(announcer);
+      announcer.innerText = message;
+      setTimeout(() => announcer.remove(), 2000);
+    }
+  </script>
+</body>
+</html>
